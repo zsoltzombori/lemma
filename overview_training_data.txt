@@ -1,0 +1,369 @@
+==============================================================================
+Overview on Generating Training Data
+==============================================================================
+
+Revision: Mon Dec 19 11:56:11 2022
+
+Contents
+- Problems and Results in General
+- Specific Problem Sets
+- Specific Result Sets
+- Extraction of Training Data from Proofs
+- Specific Training Data Sets
+
+------------------------------------------------------------------------------
+Problems and Results in General
+------------------------------------------------------------------------------
+
+It is assumed that the TPTP is installed and TPTPDirectory is set, e.g.
+$ export TPTPDirectory='/home/ch/space/tptp/TPTP-v8.0.1'
+
+Problem files are in TPTP format (cnf or fof).
+
+They are identified by TPTP problem name (e.g. 'LCL038-1') or by a
+file name given as atom relative to a configured problem directory
+(e.g. 'tc-problems/LCL025-1_basis_to_theorem_std.p').
+
+The basis for the training data are CD proofs, represented in result/5 facts.
+In addition, experiment/4 facts provide some meta information on the proofs.
+
+proof_collection_01/ contains several such files with result/5 and
+experiment/4 facts obtained with SGCD, CCS and Prover9.
+
+Arguments of result/5:
+
+  result(Problem, RunId, [Time, CTime, PTime], ResultNum, DCTerm).
+
+  * Problem: an atom, the TPTP problem name, supplied as argument via Argv.
+  * RunId: an atom supplied as argument via Argv.
+  * [Time, CTime, PTime]: Used wallclock time, CPU time and process time.
+  * ResultNum: Number of the result, starting from 1. Larger numbers appear
+    with prover configurations that successively output multiple proofs.
+  * DCTerm: Representation of the proof as D-term in compacted form
+    (see module dc_representation.pl). Can be converted to a D-term
+    with dc_to_d/2
+
+Arguments of experiment/4:
+
+  experiment(Problem, RunId, Key, Value).
+
+------------------------------------------------------------------------------
+Specific Problem Sets
+------------------------------------------------------------------------------
+
+Problem sets are are represented with some predicates in
+prolog/tptpcd_problem_lists.pl:
+
+- tptpcd_problem(Problem, Rating, NumberOfAxioms)
+
+  196 problems, including 63 with a single axiom
+
+  The "TPTCD Problems", i.e., the CD problems in the TPTP with a few
+  exclusions (multiple goals, satisfiable, detachment not with disjunction and
+  negation). Rating from TPTP 7.5.0. Other ratings are available via
+  tptpcd_problem_rating/2.
+
+- tptpcd_singlebasis(Problem)
+
+  116 problems
+
+  CD problems with a single axiom that are not in the TPTP but were derived
+  from TPTPCD problems by packing multiple axioms into a single one with the
+  Tarski/Rezus method. The problem files are in problems_01/tc-problems/.
+
+- tptpcd_ax_axiomset/2
+
+  Grouping of CD problems in the TPTP that have the same axioms. May be
+  interesting, e.g., to see the effect of the goal presence in learning.
+
+------------------------------------------------------------------------------
+Specific Result Sets
+------------------------------------------------------------------------------
+
+Results (i.e. proofs) stem from SGCD, CCS and Prover9. In datagen_lemmas.pl
+these are grouped to "proof databases" with an atom as identifier by the
+proof_db/2 predicate, for example:
+
+      proof_db(pdb_short, [ metainfo_sgcd,
+      		            metainfo_ccs_pure_dterms,
+		            results_selection_from_ccs_sgcd_nsimp ]).
+
+The respective files, e.g., results_selection_from_ccs_sgcd_nsimp.pl, are
+stored in proof_collection_01/.
+
+Suggested Start
+===============
+
+- results_selection_from_ccs_sgcd_nsimp.pl
+
+  A single result for each of 176 TPTPCD problems by CCS and SGCD. For each
+  problem some "best" proof (shortest <csize,tsize,height>) was chosen from
+  proofs obtained with various configurations. The proofs were postprocessed
+  with n-simplification.
+
+More with a Single Axiom
+========================
+
+- results_singlebasis.pl
+
+  Results by SGCD in different configurations for the tptpcd_singlebasis/1
+  problems.
+
+- metainfo_and_results_singlebasis_sgcd_goaldriven.pl
+
+  Results by SGCD in purely goal-driven configurations for the
+  tptpcd_singlebasis/1 problems. Only 10 proven problems. Not intended as
+  basis for a training set, but kept for the record.
+
+Proofs from a Different Source, Prover9
+=======================================
+
+- results_prover9_nsimp.pl
+
+  Results by Prover9 for the TPTPCD problems, postprocessed with
+  n-simplicifcation. Many of them are much longer than those by SGCD and CCS.
+
+- results_prover9_nsimp_light.pl
+
+  The same as results_prover9_nsimp.pl with 3 results removed that seem
+  too big for easy generation of training data.
+
+- results_prover9_nsimp_heavy.pl
+
+  The 3 results from results_prover9_nsimp.pl that were removed from
+  results_prover9_nsimp_heavy.pl
+
+Further Sets
+============
+
+- results_ccs_pure_dterms.pl
+
+  results_ccs_pure_dterms_part1.pl
+  results_ccs_pure_dterms_part2.pl
+  results_ccs_pure_dterms_part3.pl
+  results_ccs_pure_dterms_part4.pl
+
+  By CCS, goal-driven, with minimal csize (I think), also different or all
+  proofs with minimal csize if these could be obtained in time.
+
+  The _partX.pl versions were obtained from results_ccs_pure_dterms.pl
+  by deleting duplicate proofs for the same problem and splitting into
+  four portions for easier processing.
+
+- results_sgcd_goaldriven_height.pl
+  results_sgcd_goaldriven_tsize.pl
+
+  By SGCD in purely goal-driven mode. Should be similar to what would be
+  obtained by leanCoP.
+
+- results_sgcd.pl
+				     
+  By SGCD in various configurations, without postprocessing.
+
+- results_prover9_original.pl
+
+  By Prover9, without postprocessing.
+
+==============================================================================
+Extraction of Training Data from Proofs
+==============================================================================
+
+With datagen_lemmas.pl
+
+Configuration
+-------------
+
+- TPTPDirectory environment should be set
+- Paths in datagen_lemmas.pl should be set for:
+  proof_collection_dir/1, problem_dir/1
+
+Output Format
+-------------
+
+Described in papers/training_data_spec.tex
+
+Creating a Data File in Brief
+-----------------------------
+
+Run SWI with CDTools, e.g. swipl --no-tty --stack_limit=30g -s
+${HOME}/provers/folelim/load.pl -g
+"consult('${HOME}/provers/cdtools/src/cdtools/load.pl')" $*
+
+Load datagen_lemmas.pl
+
+?- generate_training_data(pdb_short, [], '/tmp/data.pl').
+
+Explanation
+-----------
+
+   generate_training_data(ProofDBId, Options, OutputFile)
+
+   Generate a file with training data (spo/3 facts) for all proofs in the
+   specified "proof database" (all corresponding result/5 facts). Also
+   experiment/4 facts will be used to set the meta_info property in the spo/3
+   facts.
+    
+   Arguments:
+
+   * ProofDBId: An identifier of a "proof database", that is, a list of files
+     with result/5 and experiment/4 facts, defined with proof_db/2 in
+     datagen_lemmas.pl
+
+   * Options: A list of options specified as Key=Value pairs. The following
+     keys are recognized:
+
+     lemma_methods: List of lemma method specifiers. Default:
+           [subtree,treerepair,slemma_nonpure(10,50),slemma_pure(10,50)]
+
+           For longer proofs, slemma_nonpure and slemma_pure may take some
+   	   time and space. Reducing the first parameter may help there.
+
+     src: A ground term that might help to administer the set of training data
+           generated with the invocation of generate_training_data/3. Default:
+           'src'.
+
+     no_dterms: Do not generate triples with property 'dterm' ('cdterm'
+           can be used instead). May be useful with proofs that have
+           dterms with very large tree size and moderate compacted
+           size as found typically by Prover9.
+
+    * OutputFile: An atom, the output file.
+
+==============================================================================
+Specific Training Data Sets
+==============================================================================
+
+==============================================================================
+training_data_01/training_data_pdb_short.pl.gz
+------------------------------------------------------------------------------
+
+  Underlying proof data:
+      proof_db(pdb_short, [ metainfo_sgcd,
+      		            metainfo_ccs_pure_dterms,
+		            results_selection_from_ccs_sgcd_nsimp ]).
+   Lemma generation methods:
+      subtree, treerepair, slemma_nonpure(10,50), slemma_pure(10,50)
+   Revision: Jan 04 2023
+
+==============================================================================
+The following training data sets are in
+
+http://cs.christophwernhard.com/cdtools/data-terms22/
+
+==============================================================================
+data_short.pl.gz
+------------------------------------------------------------------------------
+
+Proof DB (see proof_db/2): pdb_short
+Lemma methods: subtree, treerepair, slemma_nonpure(10,50), slemma_pure(10,50)
+Number of problems:   176 
+Number of proofs:     176
+Number of lemmas:  14,226
+
+Same as experiments/training_data_pdb_short.pl.gz
+
+A single proof for each of 176 TPTPCD problems by CCS and SGCD. For each
+problem some "best" proof (shortest <csize,tsize,height>) was chosen from
+proofs obtained with various configurations. The proofs were postprocessed
+with n-simplification.
+
+See also:
+http://cs.christophwernhard.com/cdtools/exp-tptpcd-2022-07/table_4.html
+http://cs.christophwernhard.com/cdtools/exp-ccs-2022-04/table_1.html
+
+==============================================================================
+data_many_sgcd.pl.gz
+------------------------------------------------------------------------------
+
+Proof DB (see proof_db/2): pdb_many_sgcd
+Lemma methods: subtree, treerepair, slemma_nonpure(10,50), slemma_pure(10,50)
+Number of problems:  176
+Number of proofs:    906
+Number of lemmas: 94,467
+
+Proofs of TPTPCD problems obtained with SGCD in various ways.
+
+See also:
+http://cs.christophwernhard.com/cdtools/exp-tptpcd-2022-07/table_1.html
+http://cs.christophwernhard.com/cdtools/exp-tptpcd-2022-07/table_2.html
+
+==============================================================================
+data_goaldriven.pl.gz
+------------------------------------------------------------------------------
+
+Proof DB (see proof_db/2): pdb_goaldriven
+Lemma methods: subtree, treerepair, slemma_nonpure(10,50), slemma_pure(10,50)
+Number of problems:  89
+Number of proofs:   126
+Number of lemmas: 4,948
+
+Proofs of TPTPCD problems obtained with purely goal-driven invocations of
+SGCD, i.e., a technique similar to leanCoP and related provers.
+
+See also:
+http://cs.christophwernhard.com/cdtools/exp-tptpcd-2022-07/table_3.html
+
+==============================================================================
+data_many_ccs_pure_dterms_part1.pl.gz
+data_many_ccs_pure_dterms_part2.pl.gz
+data_many_ccs_pure_dterms_part3.pl.gz
+data_many_ccs_pure_dterms_part4.pl.gz
+------------------------------------------------------------------------------
+
+Proof DB (see proof_db/2): pdb_many_ccs_pure_dterms_part1
+                           pdb_many_ccs_pure_dterms_part2
+			   pdb_many_ccs_pure_dterms_part3
+			   pdb_many_ccs_pure_dterms_part4
+
+Split into four parts for easier generating and handling. (Triples for the
+same problem object may be replicated in different parts.)
+
+Lemma methods: subtree, treerepair, slemma_nonpure(10,50), slemma_pure(10,50)
+Number of problems        94
+Number of proofs:     29,228
+Number of lemmas:  3,311,421
+
+Proofs of TPTPCD problems obtained with CCS in configurations for finding
+proofs preferably with minimal compacted size, purely goal-driven (without
+combinators).
+
+All proofs of a problem with minimal compacted size are included if those
+could be found.
+
+See also:
+http://cs.christophwernhard.com/cdtools/exp-ccs-2022-04/table_1.html
+
+==============================================================================
+data_singlebasis.pl.gz
+------------------------------------------------------------------------------
+
+Proof DB (see proof_db/2): pdb_singlebasis
+Lemma methods: subtree, treerepair, slemma_nonpure(10,50), slemma_pure(10,50)
+Number of problems:  106 
+Number of proofs:    265
+Number of lemmas: 32,266
+
+Proof obtained by SGCD in various ways for CD problems with a single axiom
+that are not in the TPTP but were derived from TPTPCD problems with multiple
+axioms by packing their axioms into a single one with the Tarski/Rezus method.
+The problem files are in problems_01/tc-problems/.
+
+==============================================================================
+data_prover9_light_6.pl.gz
+------------------------------------------------------------------------------
+
+Proof DB (see proof_db/2): pdb_prover9_light
+Lemma methods: subtree, treerepair, slemma_nonpure(6,50), slemma_pure(6,50)
+Number of problems:  165
+Number of proofs:    165
+Number of lemmas: 17,138
+
+Proofs of TPTPCD problems by Prover9 after n-simplification.
+
+TODO FOR PROVER9 PROOFS:
+- generat with slemma_nonpure(10,50), slemma_pure(10,50)
+- extract something from the 3 proofs in data_prover9_heavy
+
+See also:
+http://cs.christophwernhard.com/cdtools/exp-tptpcd-2022-07/table_1.html
+

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# parent: 144
+# LEMMA_COUNT: 3000 -> 2000
+
+
+export EXPERIMENT=145
+export PROBLEM_FILE="rated_problems.txt"
+export PROVER_TIMEOUT="[inf,1800]"
+export SECURITY_TIMEOUT=2000
+export PROVER_CONFIG="provecd_sgcd_ph_0321.pl"
+export PROVECD_CONFIG="[lemma_methods=[subtree],lemmas_not_in_proof,reproof_timeout=[inf,30]]"
+export TRAIN_VALIDATION=0.2
+export TRAIN_BS=128
+export TRAIN_LR=0.0001
+export TRAIN_TOLERANCE=50
+export TRAIN_CONVOLUTIONS=4
+export TRAIN_CHANNELS=128
+export TRAIN_HIDDEN=1024
+export TRAIN_UTILITY="u_reproof"
+export TRAIN_MODEL_TYPE="gnn"
+export TRAIN_CONCAT_LINEAR=0
+export LEMMA_COUNT=2000
+export LEMMA_UTILITY="u_reproof"
+export LEMMA_FORMAT="dterm"
+export LEMGEN_CONFIG="lg_psp_optim_7.pl"
+export DATAGEN_CONFIG="[timeout=[inf,5],processing=datagen,red=[subs,subt],head=30,lemma_methods=[subtree],lemmas_not_in_proof,reproof_timeout=[inf,30]]"
+export DATAGEN=1
+export LEMSORT_DEFAULT="[lf_hb_name,lf_hb_nongoal_symbol_occs,lf_h_subterms_not_in_goal,lf_h_excluded_goal_subterms,lf_hb_double_negation_occs,lf_h_tsize,lf_h_height,lf_h_distinct_vars,lf_hb_singletons,lf_h_csize,-lf_d_major_minor_relation,-lf_d_tsize,lf_d_csize]"
+export LEMSORT_TRAIN=1
+export EXPDIR="out/exp${EXPERIMENT}"
+export PROVER_CORENUM=100
+export LEMGEN_CORENUM=20
+export CUDA_VISIBLE_DEVICES=4
+
+bash iterative.sh > log/exp${EXPERIMENT}.out 2> log/exp${EXPERIMENT}.err

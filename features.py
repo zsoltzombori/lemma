@@ -1,0 +1,83 @@
+FEATURES = [
+    "lf_d_csize",    
+    "lf_d_tsize",
+    "lf_d_height",
+    "lf_d_grd_csize",    
+    "lf_d_major_minor_relation", # TODO ONEHOT BETTER
+    "lf_d_number_of_terminals",
+    
+    "lf_b_length",
+    "lf_hb_distinct_hb_shared_vars",
+    "lf_hb_distinct_h_only_vars",
+    "lf_hb_distinct_b_only_vars",
+    "lf_hb_singletons",
+    "lf_hb_double_negation_occs",
+    "lf_hb_nongoal_symbol_occs",
+    "lf_h_excluded_goal_subterms",
+    "lf_h_subterms_not_in_goal",
+    "lf_hb_compression_ratio_raw_deflate",
+    # "lf_hb_compression_ratio_treerepair", # TOO EXPENSIVE
+    "lf_hb_compression_ratio_dag",
+    # "lf_hb_organic", # TOO EXPENSIVE
+    # "lf_hb_name", # THIS IS AN ATOM, NOT A NUMBER
+    "lf_hb_name_status",
+    
+    "lf_h_csize",
+    "lf_h_tsize",
+    "lf_h_height",
+    "lf_h_distinct_vars",
+    "lf_b_csize",
+    "lf_b_tsize",
+    "lf_b_height",
+    "lf_b_distinct_vars",
+    "lf_hb_csize",
+    "lf_hb_tsize",
+    "lf_hb_height",
+    "lf_hb_distinct_vars",
+
+    "lf_h_var_occs",
+    "lf_h_const_occs",
+    "lf_h_fun_occs",
+    "lf_b_var_occs",
+    "lf_b_const_occs",
+    "lf_b_fun_occs",
+    "lf_hb_var_occs",
+    "lf_hb_const_occs",
+    "lf_hb_fun_occs",
+
+    "lf_h_occs_of_most_frequent_var",
+    "lf_h_occs_of_most_frequent_const",
+    "lf_h_occs_of_most_frequent_fun",
+    "lf_b_occs_of_most_frequent_var",
+    "lf_b_occs_of_most_frequent_const",
+    "lf_b_occs_of_most_frequent_fun",
+    "lf_hb_occs_of_most_frequent_var",
+    "lf_hb_occs_of_most_frequent_const",
+    "lf_hb_occs_of_most_frequent_fun",
+]
+
+# TODO FINALIZE TARGET LIST
+TARGETS = [
+    "u_tsize_reduction",
+    "u_height_reduction",
+    "u_csize_reduction",
+    "u_tsize_reduction_subst1",
+    "u_height_reduction_subst1",
+    "u_csize_reduction_subst1",
+    "u_tsize_reduction_subst2",
+    "u_height_reduction_subst2",
+    "u_csize_reduction_subst2",
+    "u_occs",
+    "u_incoming",
+    "u_close_to_goal_path",
+    "u_close_to_axioms_height",
+    "u_close_to_axioms_tsize",
+    "lf_is_in_proof",
+    "u_reproof",
+    
+    # "lfp_d_occs",
+    # "lfp_d_incoming",
+    # "lfp_d_occs_innermost_matches",
+    # "lfp_d_occs_outermost_matches",
+    # "lfp_d_min_goal_dist",
+]
