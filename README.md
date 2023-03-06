@@ -31,6 +31,7 @@ The theorem proving components are written in SWI-Prolog and require the followi
 The learning components are written in Python and require pytorch. To create a conda environment with all necessary packages:
 
 `conda env create -f environment.yml`
+
 `conda activate lemma`
 
 ## Datasets
