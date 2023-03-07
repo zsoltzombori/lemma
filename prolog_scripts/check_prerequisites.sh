@@ -1,42 +1,68 @@
 #!/bin/bash
 #
-# Exists with error message if programs needed for full use of provecd.sh amd
-# lemgen.sh are not found.
+# This script checks prerequisites for provecd.sh and lemgen.sh an writes its
+# findings to stdout.
 #
 
-if ! command -v TreeRePair &> /dev/null
-then
-    >&2 echo "ERROR: TreeRePair command not found, please install from https://github.com/dc0d32/TreeRePair"
-    exit 1
-fi
+check_cmd () {
+    if CMD="$(command -v $1)"
+    then
+	echo Found command: ${1} as ${CMD}
+    else
+	echo Missing command: ${1} ${2}
+    fi
+}
 
-if ! command -v minisat &> /dev/null
-then
-    >&2 echo "ERROR: minisat command not found"
-    exit 1
-fi
+check_var () {
+    if ! [ -z "${1+x}" ]
+    then
+	echo Found variable: ${1} set to ${!1}
+    else
+	echo Missing variable: ${1}
+    fi
+}
 
-if ! command -v prover9 &> /dev/null
-then
-    >&2 echo "ERROR: prover9 command not found"
-    exit 1
-fi
+check_file () {
+    if [ -f ${!1}/${2} ]
+    then
+	echo Found file: '$'${1}/${2}
+    else
+	echo Missing file: ${1}/${2}
+    fi
+}
 
-# Note on compiling Prover9 on recent (ca. 2021 and later) Linux systems: To
-# avoid a compilation error change the positing of the -lm flag in
-# provers.src/Makefile, for example 
-# (CC) $(CFLAGS) -o prover9 prover9.o $(OBJECTS) ../ladr/libladr.a -lm
-# instead of
-# (CC) $(CFLAGS) -lm -o prover9 prover9.o $(OBJECTS) ../ladr/libladr.a
+echo "=============================================================================="
+echo "Necessary Minimal Requirements"
+echo "=============================================================================="
 
-if ! command -v prooftrans &> /dev/null
+check_cmd swipl
+if command -v swipl &>/dev/null
 then
-    >&2 echo "ERROR: prooftrans command (comes with Prover9) not found"
-    exit 1
+    SWIV="$(swipl --version)"
+    echo Found version: ${SWIV}
+    if ! [ ${SWIV:19:1} == 9 ]
+    then
+	echo "Possible problem: swipl version >= 9.0.3 is required"
+    fi
 fi
+check_var PIE
+check_file PIE folelim/load.pl
+check_var CDTOOLS
+check_file CDTOOLS src/cdtools/load.pl
+check_var LEMGEN_OPTIONS_PATH
+check_var LEMGEN_PROBLEM_PATH
+check_var TPTPDirectory
 
-if ! command -v tptp2X &> /dev/null
-then
-    >&2 echo "ERROR: tptp2X command not found (must support at least the tptp format)"
-    exit 1
-fi
+echo "=============================================================================="
+echo "Suggested Further Programs, Required for Full Functionality"
+echo "=============================================================================="
+
+check_cmd prover9 "Note: possibly compiles only after moving '-lm' in provers.src/Makefile to end of lines"
+check_cmd prooftrans "Note: comes with Prover9"
+check_cmd tptp2X "Note: comes with the TPTP, must be configured to support at least the tptp format"
+check_cmd eprover
+check_cmd vampire
+check_cmd leancop.sh
+check_cmd minisat
+check_cmd TreeRePair "Source: https://github.com/dc0d32/TreeRePair"
+
