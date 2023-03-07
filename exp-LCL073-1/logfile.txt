@@ -1,0 +1,322 @@
+$ &>logfile.txt time prove_LCL073-1.sh
+==== GENERATING LEMMAS ====
+% Loading from source directory '/home/ch/w/provers/'
+% Setting TPTP directory to: /home/ch/space/tptp/TPTP-v8.1.2
+% Setting cdtools source directory to /home/ch/w/provers/cdtools//src/cdtools
+% Setting cdproofrepos to /home/ch/w/provers/cdtools/proofrepos
+% Setting cdexp to /home/ch/w/provers/cdtools/exp
+% Loading options file /home/ch/clouds/terms22/experiments/prolog_opts/lcl073/lg_psp_optim_7.pl
+% Effective lemgen options: [timeout=[inf,40],write_spo,unique]
+% Reading TPTP file
+% Loading tptp file: /home/ch/space/tptp/TPTP-v8.1.2/Problems/LCL/LCL073-1.p
+% Reading TPTP file
+% Loading tptp file: /home/ch/space/tptp/TPTP-v8.1.2/Problems/LCL/LCL073-1.p
+% Number of lemmas:                                0
+% Generating lemmas for method tlemma_sgcd([timeout=inf(15),lemmas=[level_solution,abandoned_level_solution]],[gen=inc_psp1,test=[lt_fh(truncate(input*4)+1),lt_ft(truncate(input*4)+1),lt_fv(truncate(input*4)+1),lt_dup,lt_subs],process_news=reg([],[],[an_sort([kp_f_ht]),an_trim(5000)])])
+% Reading TPTP file
+% Loading tptp file: /home/ch/space/tptp/TPTP-v8.1.2/Problems/LCL/LCL073-1.p
+% Reading TPTP file
+% Loading tptp file: /home/ch/space/tptp/TPTP-v8.1.2/Problems/LCL/LCL073-1.p
+% Installing axioms: [1-(((((A=>B)=>(n(C)=>n(D)))=>C)=>E)=>((E=>A)=>(D=>A)))]
+% Effective SGCD options: [goal=((a=>b)=>((b=>c)=>(a=>c))),proof=A,gen=inc_psp1,test=[lt_fh(truncate(input*4)+1),lt_ft(truncate(input*4)+1),lt_fv(truncate(input*4)+1),lt_dup,lt_subs],process_news=reg([],[],[an_sort([kp_f_ht]),an_trim(5000)]),once=true,pre_add_max=0,post_max= -1,max_level=1000000]
+% Effective levels test: [lt_fh(25),lt_ft(45),lt_fv(21),lt_dup,lt_subs]
+% Pre-level:       0 for      0
+% Creating level:             0
+% Process news: reg
+% new_level_solution/3:                            1 clauses
+% level_solution/3:                                1 clauses
+% Pre-level:       1 for      1
+% Creating level:             1
+% Process news: reg
+% new_level_solution/3:                            1 clauses
+% level_solution/3:                                2 clauses
+% Pre-level:       2 for      2
+% Creating level:             2
+% Process news: reg
+% new_level_solution/3:                            2 clauses
+% level_solution/3:                                4 clauses
+% Pre-level:       3 for      3
+% Creating level:             3
+% Process news: reg
+% new_level_solution/3:                            5 clauses
+% level_solution/3:                                9 clauses
+% Pre-level:       4 for      4
+% Creating level:             4
+% Process news: reg
+% new_level_solution/3:                           25 clauses
+% level_solution/3:                               33 clauses
+% Pre-level:       5 for      5
+% Creating level:             5
+% Process news: reg
+% new_level_solution/3:                           47 clauses
+% level_solution/3:                               80 clauses
+% Pre-level:       6 for      6
+% Creating level:             6
+% Process news: reg
+% new_level_solution/3:                          146 clauses
+% level_solution/3:                              226 clauses
+% Pre-level:       7 for      7
+% Creating level:             7
+% Process news: reg
+% new_level_solution/3:                          417 clauses
+% level_solution/3:                              642 clauses
+% Pre-level:       8 for      8
+% Creating level:             8
+% Process news: reg
+% new_level_solution/3:                        1,058 clauses
+% level_solution/3:                            1,693 clauses
+% Pre-level:       9 for      9
+% Creating level:             9
+% Process news: reg
+% new_level_solution/3:                        2,256 clauses
+% level_solution/3:                            3,922 clauses
+% Pre-level:      10 for     10
+% Creating level:            10
+% Process news: reg
+% new_level_solution/3:                        4,870 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      11 for     11
+% Creating level:            11
+% Process news: reg
+% new_level_solution/3:                        8,190 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      12 for     12
+% Creating level:            12
+% Process news: reg
+% new_level_solution/3:                       10,806 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      13 for     13
+% Creating level:            13
+% Process news: reg
+% new_level_solution/3:                       11,279 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      14 for     14
+% Creating level:            14
+% Process news: reg
+% new_level_solution/3:                        9,976 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      15 for     15
+% Creating level:            15
+% Process news: reg
+% new_level_solution/3:                        5,448 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      16 for     16
+% Creating level:            16
+% Process news: reg
+% new_level_solution/3:                        4,036 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      17 for     17
+% Creating level:            17
+% Process news: reg
+% new_level_solution/3:                        3,847 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      18 for     18
+% Creating level:            18
+% Process news: reg
+% new_level_solution/3:                        3,298 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      19 for     19
+% Creating level:            19
+% Process news: reg
+% new_level_solution/3:                        2,992 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      20 for     20
+% Creating level:            20
+% Process news: reg
+% new_level_solution/3:                        3,045 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      21 for     21
+% Creating level:            21
+% Process news: reg
+% new_level_solution/3:                        3,326 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      22 for     22
+% Creating level:            22
+% Process news: reg
+% new_level_solution/3:                        3,036 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      23 for     23
+% Creating level:            23
+% Process news: reg
+% new_level_solution/3:                        2,181 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      24 for     24
+% Creating level:            24
+% Process news: reg
+% new_level_solution/3:                        1,922 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      25 for     25
+% Creating level:            25
+% Process news: reg
+% new_level_solution/3:                        2,506 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      26 for     26
+% Creating level:            26
+% Process news: reg
+% new_level_solution/3:                        3,381 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      27 for     27
+% Creating level:            27
+% Process news: reg
+% new_level_solution/3:                        3,579 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      28 for     28
+% Creating level:            28
+% Process news: reg
+% new_level_solution/3:                        2,818 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      29 for     29
+% Creating level:            29
+% Process news: reg
+% new_level_solution/3:                        1,927 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      30 for     30
+% Creating level:            30
+% Process news: reg
+% new_level_solution/3:                        1,152 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      31 for     31
+% Creating level:            31
+% Process news: reg
+% new_level_solution/3:                          667 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      32 for     32
+% Creating level:            32
+% Process news: reg
+% new_level_solution/3:                          356 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      33 for     33
+% Creating level:            33
+% Process news: reg
+% new_level_solution/3:                          276 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      34 for     34
+% Creating level:            34
+% Process news: reg
+% new_level_solution/3:                          280 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      35 for     35
+% Creating level:            35
+% Process news: reg
+% new_level_solution/3:                          345 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      36 for     36
+% Creating level:            36
+% Process news: reg
+% new_level_solution/3:                          193 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      37 for     37
+% Creating level:            37
+% Process news: reg
+% new_level_solution/3:                           53 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      38 for     38
+% Creating level:            38
+% Process news: reg
+% new_level_solution/3:                            4 clauses
+% level_solution/3:                            5,000 clauses
+% Pre-level:      39 for     39
+% Creating level:            39
+% Process news: reg
+% new_level_solution/3:                            0 clauses
+% level_solution/3:                            5,000 clauses
+% Exhausted
+% Lemmas (total): 98,198 (LevelSolution: 5,000; Abandoned: 93,198; New: 0)
+% No proof found, returning lemmas: [level_solution,abandoned_level_solution]
+% Lemmas (total): 0
+% Number of lemmas:                           98,198
+% Processing lemmas: computing lemma features
+% Progress:            0% Progress:          100% Progress:          200% Progress:          300% Progress:          400% Progress:          500% Progress:          600% Progress:          700% Progress:          800% Progress:          900% Progress:        1,000% Progress:        1,100% Progress:        1,200% Progress:        1,300% Progress:        1,400% Progress:        1,500% Progress:        1,600% Progress:        1,700% Progress:        1,800% Progress:        1,900% Progress:        2,000% Progress:        2,100% Progress:        2,200% Progress:        2,300% Progress:        2,400% Progress:        2,500% Progress:        2,600% Progress:        2,700% Progress:        2,800% Progress:        2,900% Progress:        3,000% Progress:        3,100% Progress:        3,200% Progress:        3,300% Progress:        3,400% Progress:        3,500% Progress:        3,600% Progress:        3,700% Progress:        3,800% Progress:        3,900% Progress:        4,000% Progress:        4,100% Progress:        4,200% Progress:        4,300% Progress:        4,400% Progress:        4,500% Progress:        4,600% Progress:        4,700% Progress:        4,800% Progress:        4,900% Progress:        5,000% Progress:        5,100% Progress:        5,200% Progress:        5,300% Progress:        5,400% Progress:        5,500% Progress:        5,600% Progress:        5,700% Progress:        5,800% Progress:        5,900% Progress:        6,000% Progress:        6,100% Progress:        6,200% Progress:        6,300% Progress:        6,400% Progress:        6,500% Progress:        6,600% Progress:        6,700% Progress:        6,800% Progress:        6,900% Progress:        7,000% Progress:        7,100% Progress:        7,200% Progress:        7,300% Progress:        7,400% Progress:        7,500% Progress:        7,600% Progress:        7,700% Progress:        7,800% Progress:        7,900% Progress:        8,000% Progress:        8,100% Progress:        8,200% Progress:        8,300% Progress:        8,400% Progress:        8,500% Progress:        8,600% Progress:        8,700% Progress:        8,800% Progress:        8,900% Progress:        9,000% Progress:        9,100% Progress:        9,200% Progress:        9,300% Progress:        9,400% Progress:        9,500% Progress:        9,600% Progress:        9,700% Progress:        9,800% Progress:        9,900% Progress:       10,000% Progress:       10,100% Progress:       10,200% Progress:       10,300% Progress:       10,400% Progress:       10,500% Progress:       10,600% Progress:       10,700% Progress:       10,800% Progress:       10,900% Progress:       11,000% Progress:       11,100% Progress:       11,200% Progress:       11,300% Progress:       11,400% Progress:       11,500% Progress:       11,600% Progress:       11,700% Progress:       11,800% Progress:       11,900% Progress:       12,000% Progress:       12,100% Progress:       12,200% Progress:       12,300% Progress:       12,400% Progress:       12,500% Progress:       12,600% Progress:       12,700% Progress:       12,800% Progress:       12,900% Progress:       13,000% Progress:       13,100% Progress:       13,200% Progress:       13,300% Progress:       13,400% Progress:       13,500% Progress:       13,600% Progress:       13,700% Progress:       13,800% Progress:       13,900% Progress:       14,000% Progress:       14,100% Progress:       14,200% Progress:       14,300% Progress:       14,400% Progress:       14,500% Progress:       14,600% Progress:       14,700% Progress:       14,800% Progress:       14,900% Progress:       15,000% Progress:       15,100% Progress:       15,200% Progress:       15,300% Progress:       15,400% Progress:       15,500% Progress:       15,600% Progress:       15,700% Progress:       15,800% Progress:       15,900% Progress:       16,000% Progress:       16,100% Progress:       16,200% Progress:       16,300% Progress:       16,400% Progress:       16,500% Progress:       16,600% Progress:       16,700% Progress:       16,800% Progress:       16,900% Progress:       17,000% Progress:       17,100% Progress:       17,200% Progress:       17,300% Progress:       17,400% Progress:       17,500% Progress:       17,600% Progress:       17,700% Progress:       17,800% Progress:       17,900% Progress:       18,000% Progress:       18,100% Progress:       18,200% Progress:       18,300% Progress:       18,400% Progress:       18,500% Progress:       18,600% Progress:       18,700% Progress:       18,800% Progress:       18,900% Progress:       19,000% Progress:       19,100% Progress:       19,200% Progress:       19,300% Progress:       19,400% Progress:       19,500% Progress:       19,600% Progress:       19,700% Progress:       19,800% Progress:       19,900% Progress:       20,000% Progress:       20,100% Progress:       20,200% Progress:       20,300% Progress:       20,400% Progress:       20,500% Progress:       20,600% Progress:       20,700% Progress:       20,800% Progress:       20,900% Progress:       21,000% Progress:       21,100% Progress:       21,200% Progress:       21,300% Progress:       21,400% Progress:       21,500% Progress:       21,600% Progress:       21,700% Progress:       21,800% Progress:       21,900% Progress:       22,000% Progress:       22,100% Progress:       22,200% Progress:       22,300% Progress:       22,400% Progress:       22,500% Progress:       22,600% Progress:       22,700% Progress:       22,800% Progress:       22,900% Progress:       23,000% Progress:       23,100% Progress:       23,200% Progress:       23,300% Progress:       23,400% Progress:       23,500% Progress:       23,600% Progress:       23,700% Progress:       23,800% Progress:       23,900% Progress:       24,000% Progress:       24,100% Progress:       24,200% Progress:       24,300% Progress:       24,400% Progress:       24,500% Progress:       24,600% Progress:       24,700% Progress:       24,800% Progress:       24,900% Progress:       25,000% Progress:       25,100% Progress:       25,200% Progress:       25,300% Progress:       25,400% Progress:       25,500% Progress:       25,600% Progress:       25,700% Progress:       25,800% Progress:       25,900% Progress:       26,000% Progress:       26,100% Progress:       26,200% Progress:       26,300% Progress:       26,400% Progress:       26,500% Progress:       26,600% Progress:       26,700% Progress:       26,800% Progress:       26,900% Progress:       27,000% Progress:       27,100% Progress:       27,200% Progress:       27,300% Progress:       27,400% Progress:       27,500% Progress:       27,600% Progress:       27,700% Progress:       27,800% Progress:       27,900% Progress:       28,000% Progress:       28,100% Progress:       28,200% Progress:       28,300% Progress:       28,400% Progress:       28,500% Progress:       28,600% Progress:       28,700% Progress:       28,800% Progress:       28,900% Progress:       29,000% Progress:       29,100% Progress:       29,200% Progress:       29,300% Progress:       29,400% Progress:       29,500% Progress:       29,600% Progress:       29,700% Progress:       29,800% Progress:       29,900% Progress:       30,000% Progress:       30,100% Progress:       30,200% Progress:       30,300% Progress:       30,400% Progress:       30,500% Progress:       30,600% Progress:       30,700% Progress:       30,800% Progress:       30,900% Progress:       31,000% Progress:       31,100% Progress:       31,200% Progress:       31,300% Progress:       31,400% Progress:       31,500% Progress:       31,600% Progress:       31,700% Progress:       31,800% Progress:       31,900% Progress:       32,000% Progress:       32,100% Progress:       32,200% Progress:       32,300% Progress:       32,400% Progress:       32,500% Progress:       32,600% Progress:       32,700% Progress:       32,800% Progress:       32,900% Progress:       33,000% Progress:       33,100% Progress:       33,200% Progress:       33,300% Progress:       33,400% Progress:       33,500% Progress:       33,600% Progress:       33,700% Progress:       33,800% Progress:       33,900% Progress:       34,000% Progress:       34,100% Progress:       34,200% Progress:       34,300% Progress:       34,400% Progress:       34,500% Progress:       34,600% Progress:       34,700% Progress:       34,800% Progress:       34,900% Progress:       35,000% Progress:       35,100% Progress:       35,200% Progress:       35,300% Progress:       35,400% Progress:       35,500% Progress:       35,600% Progress:       35,700% Progress:       35,800% Progress:       35,900% Progress:       36,000% Progress:       36,100% Progress:       36,200% Progress:       36,300% Progress:       36,400% Progress:       36,500% Progress:       36,600% Progress:       36,700% Progress:       36,800% Progress:       36,900% Progress:       37,000% Progress:       37,100% Progress:       37,200% Progress:       37,300% Progress:       37,400% Progress:       37,500% Progress:       37,600% Progress:       37,700% Progress:       37,800% Progress:       37,900% Progress:       38,000% Progress:       38,100% Progress:       38,200% Progress:       38,300% Progress:       38,400% Progress:       38,500% Progress:       38,600% Progress:       38,700% Progress:       38,800% Progress:       38,900% Progress:       39,000% Progress:       39,100% Progress:       39,200% Progress:       39,300% Progress:       39,400% Progress:       39,500% Progress:       39,600% Progress:       39,700% Progress:       39,800% Progress:       39,900% Progress:       40,000% Progress:       40,100% Progress:       40,200% Progress:       40,300% Progress:       40,400% Progress:       40,500% Progress:       40,600% Progress:       40,700% Progress:       40,800% Progress:       40,900% Progress:       41,000% Progress:       41,100% Progress:       41,200% Progress:       41,300% Progress:       41,400% Progress:       41,500% Progress:       41,600% Progress:       41,700% Progress:       41,800% Progress:       41,900% Progress:       42,000% Progress:       42,100% Progress:       42,200% Progress:       42,300% Progress:       42,400% Progress:       42,500% Progress:       42,600% Progress:       42,700% Progress:       42,800% Progress:       42,900% Progress:       43,000% Progress:       43,100% Progress:       43,200% Progress:       43,300% Progress:       43,400% Progress:       43,500% Progress:       43,600% Progress:       43,700% Progress:       43,800% Progress:       43,900% Progress:       44,000% Progress:       44,100% Progress:       44,200% Progress:       44,300% Progress:       44,400% Progress:       44,500% Progress:       44,600% Progress:       44,700% Progress:       44,800% Progress:       44,900% Progress:       45,000% Progress:       45,100% Progress:       45,200% Progress:       45,300% Progress:       45,400% Progress:       45,500% Progress:       45,600% Progress:       45,700% Progress:       45,800% Progress:       45,900% Progress:       46,000% Progress:       46,100% Progress:       46,200% Progress:       46,300% Progress:       46,400% Progress:       46,500% Progress:       46,600% Progress:       46,700% Progress:       46,800% Progress:       46,900% Progress:       47,000% Progress:       47,100% Progress:       47,200% Progress:       47,300% Progress:       47,400% Progress:       47,500% Progress:       47,600% Progress:       47,700% Progress:       47,800% Progress:       47,900% Progress:       48,000% Progress:       48,100% Progress:       48,200% Progress:       48,300% Progress:       48,400% Progress:       48,500% Progress:       48,600% Progress:       48,700% Progress:       48,800% Progress:       48,900% Progress:       49,000% Progress:       49,100% Progress:       49,200% Progress:       49,300% Progress:       49,400% Progress:       49,500% Progress:       49,600% Progress:       49,700% Progress:       49,800% Progress:       49,900% Progress:       50,000% Progress:       50,100% Progress:       50,200% Progress:       50,300% Progress:       50,400% Progress:       50,500% Progress:       50,600% Progress:       50,700% Progress:       50,800% Progress:       50,900% Progress:       51,000% Progress:       51,100% Progress:       51,200% Progress:       51,300% Progress:       51,400% Progress:       51,500% Progress:       51,600% Progress:       51,700% Progress:       51,800% Progress:       51,900% Progress:       52,000% Progress:       52,100% Progress:       52,200% Progress:       52,300% Progress:       52,400% Progress:       52,500% Progress:       52,600% Progress:       52,700% Progress:       52,800% Progress:       52,900% Progress:       53,000% Progress:       53,100% Progress:       53,200% Progress:       53,300% Progress:       53,400% Progress:       53,500% Progress:       53,600% Progress:       53,700% Progress:       53,800% Progress:       53,900% Progress:       54,000% Progress:       54,100% Progress:       54,200% Progress:       54,300% Progress:       54,400% Progress:       54,500% Progress:       54,600% Progress:       54,700% Progress:       54,800% Progress:       54,900% Progress:       55,000% Progress:       55,100% Progress:       55,200% Progress:       55,300% Progress:       55,400% Progress:       55,500% Progress:       55,600% Progress:       55,700% Progress:       55,800% Progress:       55,900% Progress:       56,000% Progress:       56,100% Progress:       56,200% Progress:       56,300% Progress:       56,400% Progress:       56,500% Progress:       56,600% Progress:       56,700% Progress:       56,800% Progress:       56,900% Progress:       57,000% Progress:       57,100% Progress:       57,200% Progress:       57,300% Progress:       57,400% Progress:       57,500% Progress:       57,600% Progress:       57,700% Progress:       57,800% Progress:       57,900% Progress:       58,000% Progress:       58,100% Progress:       58,200% Progress:       58,300% Progress:       58,400% Progress:       58,500% Progress:       58,600% Progress:       58,700% Progress:       58,800% Progress:       58,900% Progress:       59,000% Progress:       59,100% Progress:       59,200% Progress:       59,300% Progress:       59,400% Progress:       59,500% Progress:       59,600% Progress:       59,700% Progress:       59,800% Progress:       59,900% Progress:       60,000% Progress:       60,100% Progress:       60,200% Progress:       60,300% Progress:       60,400% Progress:       60,500% Progress:       60,600% Progress:       60,700% Progress:       60,800% Progress:       60,900% Progress:       61,000% Progress:       61,100% Progress:       61,200% Progress:       61,300% Progress:       61,400% Progress:       61,500% Progress:       61,600% Progress:       61,700% Progress:       61,800% Progress:       61,900% Progress:       62,000% Progress:       62,100% Progress:       62,200% Progress:       62,300% Progress:       62,400% Progress:       62,500% Progress:       62,600% Progress:       62,700% Progress:       62,800% Progress:       62,900% Progress:       63,000% Progress:       63,100% Progress:       63,200% Progress:       63,300% Progress:       63,400% Progress:       63,500% Progress:       63,600% Progress:       63,700% Progress:       63,800% Progress:       63,900% Progress:       64,000% Progress:       64,100% Progress:       64,200% Progress:       64,300% Progress:       64,400% Progress:       64,500% Progress:       64,600% Progress:       64,700% Progress:       64,800% Progress:       64,900% Progress:       65,000% Progress:       65,100% Progress:       65,200% Progress:       65,300% Progress:       65,400% Progress:       65,500% Progress:       65,600% Progress:       65,700% Progress:       65,800% Progress:       65,900% Progress:       66,000% Progress:       66,100% Progress:       66,200% Progress:       66,300% Progress:       66,400% Progress:       66,500% Progress:       66,600% Progress:       66,700% Progress:       66,800% Progress:       66,900% Progress:       67,000% Progress:       67,100% Progress:       67,200% Progress:       67,300% Progress:       67,400% Progress:       67,500% Progress:       67,600% Progress:       67,700% Progress:       67,800% Progress:       67,900% Progress:       68,000% Progress:       68,100% Progress:       68,200% Progress:       68,300% Progress:       68,400% Progress:       68,500% Progress:       68,600% Progress:       68,700% Progress:       68,800% Progress:       68,900% Progress:       69,000% Progress:       69,100% Progress:       69,200% Progress:       69,300% Progress:       69,400% Progress:       69,500% Progress:       69,600% Progress:       69,700% Progress:       69,800% Progress:       69,900% Progress:       70,000% Progress:       70,100% Progress:       70,200% Progress:       70,300% Progress:       70,400% Progress:       70,500% Progress:       70,600% Progress:       70,700% Progress:       70,800% Progress:       70,900% Progress:       71,000% Progress:       71,100% Progress:       71,200% Progress:       71,300% Progress:       71,400% Progress:       71,500% Progress:       71,600% Progress:       71,700% Progress:       71,800% Progress:       71,900% Progress:       72,000% Progress:       72,100% Progress:       72,200% Progress:       72,300% Progress:       72,400% Progress:       72,500% Progress:       72,600% Progress:       72,700% Progress:       72,800% Progress:       72,900% Progress:       73,000% Progress:       73,100% Progress:       73,200% Progress:       73,300% Progress:       73,400% Progress:       73,500% Progress:       73,600% Progress:       73,700% Progress:       73,800% Progress:       73,900% Progress:       74,000% Progress:       74,100% Progress:       74,200% Progress:       74,300% Progress:       74,400% Progress:       74,500% Progress:       74,600% Progress:       74,700% Progress:       74,800% Progress:       74,900% Progress:       75,000% Progress:       75,100% Progress:       75,200% Progress:       75,300% Progress:       75,400% Progress:       75,500% Progress:       75,600% Progress:       75,700% Progress:       75,800% Progress:       75,900% Progress:       76,000% Progress:       76,100% Progress:       76,200% Progress:       76,300% Progress:       76,400% Progress:       76,500% Progress:       76,600% Progress:       76,700% Progress:       76,800% Progress:       76,900% Progress:       77,000% Progress:       77,100% Progress:       77,200% Progress:       77,300% Progress:       77,400% Progress:       77,500% Progress:       77,600% Progress:       77,700% Progress:       77,800% Progress:       77,900% Progress:       78,000% Progress:       78,100% Progress:       78,200% Progress:       78,300% Progress:       78,400% Progress:       78,500% Progress:       78,600% Progress:       78,700% Progress:       78,800% Progress:       78,900% Progress:       79,000% Progress:       79,100% Progress:       79,200% Progress:       79,300% Progress:       79,400% Progress:       79,500% Progress:       79,600% Progress:       79,700% Progress:       79,800% Progress:       79,900% Progress:       80,000% Progress:       80,100% Progress:       80,200% Progress:       80,300% Progress:       80,400% Progress:       80,500% Progress:       80,600% Progress:       80,700% Progress:       80,800% Progress:       80,900% Progress:       81,000% Progress:       81,100% Progress:       81,200% Progress:       81,300% Progress:       81,400% Progress:       81,500% Progress:       81,600% Progress:       81,700% Progress:       81,800% Progress:       81,900% Progress:       82,000% Progress:       82,100% Progress:       82,200% Progress:       82,300% Progress:       82,400% Progress:       82,500% Progress:       82,600% Progress:       82,700% Progress:       82,800% Progress:       82,900% Progress:       83,000% Progress:       83,100% Progress:       83,200% Progress:       83,300% Progress:       83,400% Progress:       83,500% Progress:       83,600% Progress:       83,700% Progress:       83,800% Progress:       83,900% Progress:       84,000% Progress:       84,100% Progress:       84,200% Progress:       84,300% Progress:       84,400% Progress:       84,500% Progress:       84,600% Progress:       84,700% Progress:       84,800% Progress:       84,900% Progress:       85,000% Progress:       85,100% Progress:       85,200% Progress:       85,300% Progress:       85,400% Progress:       85,500% Progress:       85,600% Progress:       85,700% Progress:       85,800% Progress:       85,900% Progress:       86,000% Progress:       86,100% Progress:       86,200% Progress:       86,300% Progress:       86,400% Progress:       86,500% Progress:       86,600% Progress:       86,700% Progress:       86,800% Progress:       86,900% Progress:       87,000% Progress:       87,100% Progress:       87,200% Progress:       87,300% Progress:       87,400% Progress:       87,500% Progress:       87,600% Progress:       87,700% Progress:       87,800% Progress:       87,900% Progress:       88,000% Progress:       88,100% Progress:       88,200% Progress:       88,300% Progress:       88,400% Progress:       88,500% Progress:       88,600% Progress:       88,700% Progress:       88,800% Progress:       88,900% Progress:       89,000% Progress:       89,100% Progress:       89,200% Progress:       89,300% Progress:       89,400% Progress:       89,500% Progress:       89,600% Progress:       89,700% Progress:       89,800% Progress:       89,900% Progress:       90,000% Progress:       90,100% Progress:       90,200% Progress:       90,300% Progress:       90,400% Progress:       90,500% Progress:       90,600% Progress:       90,700% Progress:       90,800% Progress:       90,900% Progress:       91,000% Progress:       91,100% Progress:       91,200% Progress:       91,300% Progress:       91,400% Progress:       91,500% Progress:       91,600% Progress:       91,700% Progress:       91,800% Progress:       91,900% Progress:       92,000% Progress:       92,100% Progress:       92,200% Progress:       92,300% Progress:       92,400% Progress:       92,500% Progress:       92,600% Progress:       92,700% Progress:       92,800% Progress:       92,900% Progress:       93,000% Progress:       93,100% Progress:       93,200% Progress:       93,300% Progress:       93,400% Progress:       93,500% Progress:       93,600% Progress:       93,700% Progress:       93,800% Progress:       93,900% Progress:       94,000% Progress:       94,100% Progress:       94,200% Progress:       94,300% Progress:       94,400% Progress:       94,500% Progress:       94,600% Progress:       94,700% Progress:       94,800% Progress:       94,900% Progress:       95,000% Progress:       95,100% Progress:       95,200% Progress:       95,300% Progress:       95,400% Progress:       95,500% Progress:       95,600% Progress:       95,700% Progress:       95,800% Progress:       95,900% Progress:       96,000% Progress:       96,100% Progress:       96,200% Progress:       96,300% Progress:       96,400% Progress:       96,500% Progress:       96,600% Progress:       96,700% Progress:       96,800% Progress:       96,900% Progress:       97,000% Progress:       97,100% Progress:       97,200% Progress:       97,300% Progress:       97,400% Progress:       97,500% Progress:       97,600% Progress:       97,700% Progress:       97,800% Progress:       97,900% Progress:       98,000% Progress:       98,100
+% Writing spo/3 facts
+% Writing done
+==== SORTING LEMMAS ====
+% Loading from source directory '/home/ch/w/provers/'
+% Setting TPTP directory to: /home/ch/space/tptp/TPTP-v8.1.2
+% Setting cdtools source directory to /home/ch/w/provers/cdtools//src/cdtools
+% Setting cdproofrepos to /home/ch/w/provers/cdtools/proofrepos
+% Setting cdexp to /home/ch/w/provers/cdtools/exp
+% Reading /tmp/lemmas_LCL073-1_psp_optim_7.pl
+% Processing
+% Writing output
+==== PROVING ====
+% Loading from source directory '/home/ch/w/provers/'
+% Setting TPTP directory to: /home/ch/space/tptp/TPTP-v8.1.2
+% Setting cdtools source directory to /home/ch/w/provers/cdtools//src/cdtools
+% Setting cdproofrepos to /home/ch/w/provers/cdtools/proofrepos
+% Setting cdexp to /home/ch/w/provers/cdtools/exp
+% Loading options file /home/ch/clouds/terms22/experiments/prolog_opts/lcl073/provecd_sgcd_ph_0321.pl
+% Reading input lemmas /tmp/input_lemmas_LCL073-1_psp_optim_7.pl
+% Number of read lemmas: 98,198
+% Reading TPTP file
+% Loading tptp file: /home/ch/space/tptp/TPTP-v8.1.2/Problems/LCL/LCL073-1.p
+% Reading TPTP file
+% Loading tptp file: /home/ch/space/tptp/TPTP-v8.1.2/Problems/LCL/LCL073-1.p
+% Installing axioms: [1-(((((A=>B)=>(n(C)=>n(D)))=>C)=>E)=>((E=>A)=>(D=>A)))]
+% Injecting 2,900 lemmas
+% Autoclip tsize: 83, max: 558, |lemmas(</=/>)|: 1,482/59/1,359
+% Effective level determination method: clipped_tsize(83)
+% Added 2,900 lemmas to level_solution/3
+% Found max level: 83
+% Effective max cached level: 83
+% Effective levels test: [lt_fh(13),lt_ft(34),lt_fv(11),lt_dup,lt_subs,lt_orga1]
+% Pre-level:      84 for     84
+% Creating level:            84
+% Process news: reg
+% new_level_solution/3:                          194 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      85 for     85
+% Creating level:            85
+% Process news: reg
+% new_level_solution/3:                          311 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      86 for     86
+% Creating level:            86
+% Process news: reg
+% new_level_solution/3:                          514 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      87 for     87
+% Creating level:            87
+% Process news: reg
+% new_level_solution/3:                          677 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      88 for     88
+% Creating level:            88
+% Process news: reg
+% new_level_solution/3:                          688 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      89 for     89
+% Creating level:            89
+% Process news: reg
+% new_level_solution/3:                          602 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      90 for     90
+% Creating level:            90
+% Process news: reg
+% new_level_solution/3:                          355 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      91 for     91
+% Creating level:            91
+% Process news: reg
+% new_level_solution/3:                          582 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      92 for     92
+% Creating level:            92
+% Process news: reg
+% new_level_solution/3:                        1,097 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      93 for     93
+% Creating level:            93
+% Process news: reg
+% new_level_solution/3:                        1,558 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      94 for     94
+% Creating level:            94
+% Process news: reg
+% new_level_solution/3:                        2,134 clauses
+% level_solution/3:                            1,500 clauses
+% Pre-level:      95 for     95
+% Proof found for 'LCL073-1' in 19.803 sec; csize: 46, tsize: 3,276, height: 40, 
+% proof_dc('LCL073-1',19.803,d(d(1,d(A,d(d(d(d(A,B),C),D),E))),d(F,d(F,1)))-[G=d(1,d(1,d(1,1))),H=d(1,I),I=d(1,J),K=d(1,d(B,d(1,d(d(1,d(C,d(C,d(d(D,J),I)))),1)))),F=d(1,d(A,d(1,d(A,H)))),J=d(G,G),B=d(H,1),L=d(H,B),D=d(d(1,d(1,d(I,E))),1),M=d(d(d(1,d(1,L)),B),1),E=d(M,d(1,C)),C=d(M,B),A=d(d(d(K,d(H,d(M,K))),1),L)]).
+% Inferences per second: 4,261,179; 1 s = 0.85 inf; 1 inf = 1.17 s
+261.26user 7.43system 4:26.91elapsed 100%CPU (0avgtext+0avgdata 2948828maxresident)k
+0inputs+981656outputs (0major+2467684minor)pagefaults 0swaps

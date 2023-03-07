@@ -1,0 +1,565 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper]{geometry}
+\usepackage{comment}
+\usepackage{tocloft}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{fancyvrb}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+hyperfootnotes=false,
+breaklinks=true,
+colorlinks=false
+}
+
+\newcommand{\name}[1]{\textit{#1}}
+\newcommand{\f}[1]{\texttt{#1}}
+\newcommand{\m}[1]{\mathit{#1}}
+\newcommand{\var}[1]{\textnormal{\textit{#1}}}
+\newcommand{\lit}[1]{\textnormal{\textit{#1}}}
+
+\newcommand{\propsig}[2]
+{\noindent \f{#1} : #2}
+
+\newcommand{\propdesc}[1]
+{\par \hspace*{\fill}\begin{minipage}{0.9\textwidth}#1\end{minipage}\par\smallskip}
+
+\newcolumntype{L}[1]
+{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]
+{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]
+{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{M}[1]
+{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}$}p{#1}<$}
+\newcolumntype{S}{@{\hspace{4pt}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newcommand{\supterm}{\mathrel{\rhd}}
+% \newcommand{\suptermq}{\mathrel{\unrhd}}
+% \newcommand{\notsuptermq}{\not \mathrel{\unrhd}}
+% \newcommand\subsumedBy{\mathrel{\ooalign{$\geq$\cr
+%       \hidewidth\raise.225ex\hbox{$\cdot\mkern7.0mu$}\cr}}}
+% \newcommand\subsumes{\mathrel{\ooalign{$\leq$\cr
+%       \hidewidth\raise.225ex\hbox{$\cdot\mkern2.0mu$}\cr}}}
+% \newcommand\strictlySubsumes{\mathrel{\ooalign{$<$\cr
+%       \hidewidth\raise.0ex\hbox{$\cdot\mkern2.0mu$}\cr}}}
+% \newcommand\strictlySubsumedBy{\mathrel{\ooalign{$>$\cr
+%        \hidewidth\raise.0ex\hbox{$\cdot\mkern7.0mu$}\cr}}}
+% \newcommand\variant{\mathrel{\ooalign{$=$\cr
+%       \hidewidth\raise.7ex\hbox{$\cdot\mkern4.5mu$}\cr}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{<PROJECT-NAME> Training Data Format}
+\author{WB, JO, MR, CW, ZZ}
+
+\date{Draft -- \today}
+
+\begin{document}
+\maketitle
+
+
+\section{General Remarks}
+
+Our concrete data representation is readable with SWI-Prolog.
+
+We consider entities of three types: \f{problem}, \f{proof} and \f{lemma}.
+
+Data are stored in triple facts
+\begin{center}
+\f{spo}(\var{Subject}, \var{Property}, \var{Object}).
+\end{center}
+
+A triple with the \f{type} property is present for all entities that appear as
+\var{Subject} in some triple.
+
+\var{Object} can be an identifier of another entity appearing as \var{Subject}
+in some triple or can be literal value, that is, a term as specified in
+Sect.~\ref{sec-literal-types}. \var{Property} can be an atom or a compound
+term that is ground. Examples for the latter are properties \f{axiom(1)} and
+\f{axiom(2)}.
+
+Entity identifiers are atoms. Their concrete form depends on the entity type.
+
+% TODO (maybe): indicate which properties are expected to be present and which
+% are optional. TODO (maybe): outline how far this is tied to CD and how it
+% can be generalized.
+
+\subsection{Terminology: Size Measures}
+\begin{longtable}{lL{28em}}
+  \emph{Tree size} & The tree size of a tree or term is the number of inner
+  nodes, or the number of occurrences of function symbols with arity $\geq 1$.
+  The tree size of a multiset of trees or terms is the sum of the tree sizes
+  of its members.\\
+ \emph{Height} & The height of a tree of term is the number
+  of edges of the longest downward path from the root to a leaf. The height of
+  a set of trees or terms is the maximum of the height of its members.\\
+  \emph{Compacted size} & The compacted size of a tree or term is the number of
+  inner nodes of the minimal DAG representing the tree, or the number of
+  distinct compound subterms. The compacted size of a set of trees or terms is
+  number of inner nodes of the minimal DAG representing the set, or the number
+  of distinct compound subterms of the members of the set.
+\end{longtable}
+
+We also talk about applying these size measures to a \emph{list}, as a data
+object, which is then taken to represent the multiset or set, respectively, of
+its members.
+
+% Height and compacted size could also be defined on multisets, but for any
+% given multiset the value would be the same as the value for the set of its
+% members.
+
+\subsection{Literal Types}
+\label{sec-literal-types}
+
+As types of literal values of we consider the following.
+
+\begin{longtable}{lL{28em}}
+  \lit{Term} & An arbitrary Prolog term.\\
+  \lit{Atom} & A Prolog atom.\\
+  \lit{NatNum} & A natural number.\\
+  \lit{NormalizedValue} & A number between 0 and 1.\\
+  \lit{FormulaTerm} & A term that is understood as representing an atomic
+  first-order formula. Free variables are represented by Prolog variables. For
+  CD problems, the unary wrapper predicate is omitted and \lit{FormulaTerm} is
+  a propositional formula of the problem's ``object logic'' with function
+  symbols \f{i}/2, \f{n}/1 and \f{falsehood}/0. E.g., a clausal axiom
+  \f{is\_a\_theorem}(\f{implies}(X,\f{implies}(Y,X))) would
+  be represented by the \lit{FormulaTerm}
+  \f{i}(X,\f{i}(Y,X)).\\
+  \lit{FormulaTermList} & A list of objects of type \lit{FormulaTerm}.\\
+  \lit{DTerm} & A term, called D-term, that is understood as representing the
+  proof structure of a CD proof. The term is formed from $\f{d}/2$ as function
+  symbol, objects of type
+  \lit{NatNum}, and variables.\\
+  \lit{DCTerm} & A compacted representation of a \lit{DTerm}. For a given
+  \lit{DTerm}~\lit{D} the \lit{DCTerm} is \lit{A}\f{-}\lit{B} as obtained with
+  \texttt{term\_factorized}(\lit{D}, \lit{A}, \lit{B}). See
+  Sect.~\ref{sec-aux-utils} for a conversion predicate in the opposite
+    direction.\\
+  \lit{KeyValueList} & A list of \lit{Key}\f{=}\lit{Value} pairs.\\
+\end{longtable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Entity Types and Associated Properties}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Type \f{problem}}
+
+Represents a proving problem, that is, a goal and a finite set of axioms.
+
+The identifier of a \f{problem} is either a TPTP problem name, for example
+\f{'LCL038-1'}, or indicates a file or other document in TPTP format. (TODO:
+maybe use something like \f{'foo:path/to/myfile.p'} for these other files and
+documents.)
+
+The following properties are supported for entities of type \f{problem}.
+
+\propsig{goal}{\lit{FormulaTerm}}
+
+\propdesc{The proof goal.}
+
+\propsig{axiom(\var{NatNum})}{\lit{FormulaTerm}}
+
+\propdesc{Axiom number \var{NatNum} of the problem, where \var{NatNum} is a
+  natural number, starting from $1$.}
+
+\propsig{number\_of\_axioms}{\lit{NatNum}}
+
+\propdesc{Number of axioms of the problem.}
+
+% \subsubsection*{Not (yet) supported}
+% 
+% \propsig{axiomset\_identifier}{\f{problem}} 
+% 
+% \propdesc{Some canonically chosen problem with the same axioms.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Type \f{proof}}                       
+
+\propsig{problem}{\f{problem}}
+
+\propdesc{The proven problem. Specified as the atom that identifies the
+  problem.}
+
+\propsig{source}{\lit{Term}}
+
+\propdesc{Has no internal meaning. Intended to organize fact bases with sets of
+  proofs. Can be supplied with some value that indicates the source of the
+  proof or its membership in some set of proofs.}
+
+
+\propsig{meta\_info}{\lit{KeyValueList}}
+
+\propdesc{Has no internal meaning. Used to represent meta information about
+  the proof such as how and when it was obtained, with system specific keys.}
+
+\propsig{dcterm}{\lit{DCTerm}}
+
+\propdesc{The proof's D-term (i.e., the structure of proof) as ground
+  \lit{DCTerm}.}
+
+\propsig{d\_csize}{\lit{NatNum}}\\
+\propsig{d\_tsize}{\lit{NatNum}}\\
+\propsig{d\_height}{\lit{NatNum}}
+
+\propdesc{Compacted size, tree size and height of the proof's D-term.}
+
+\subsection{Type \f{lemma}}                       
+
+We consider a lemma in two respects: Its formula and the proof structure
+(D-term) that proves the formula from the problem's axioms. The formula is a
+logic atom if and only if the D-term is ground. It is a definite clause with
+$n$ body atoms if and only if the D-term contains $n$ distinct variables.
+
+For lemmas whose D-term $d_L$ has variables we use different ways to estimate
+the size reducing effect of the lemma on a given proof D-term $d_P$, based on
+different ways of substituting subterms matching $d_L$ in $d_P$:
+\begin{itemize}
+
+\item \textsc{Innermost}: In a preorder traversal replace all instances of
+  $d_L$ that have no instance of $d_L$ as subterm with the tuple of the
+  variable values according to the match. (If a term is replaced at its visit,
+  neither the replaced nor the replacing subterms are traversed.) Instances
+  are replaced as they appear in left-to-right depth-first order. The tuple
+  constructor is a special symbol that is not counted for size measuring.
+
+\item \textsc{Innermost Exhaustive}: This is \textsc{Innermost} applied
+  repeatedly until no more replacements can be performed.
+  
+\item \textsc{Outermost}: In a preorder traversal replace all instances of
+  $d_L$ with the tuple of the variable values according to the match. (If a
+  term is replaced at its visit, neither the replaced nor the replacing
+  subtrees are traversed.) The tuple constructor is a special symbol that is
+  not counted for size measuring.
+\end{itemize}
+
+\propsig{problem}{\f{problem}}
+
+\propdesc{The problem for which the lemma is intended. The lemma may be
+  extracted from a proof of the problem or generated in some other way. In any
+  case, it is assumed that it follows from the problem's axioms.}
+
+\propsig{lf\_proof}{\f{proof}}
+
+\propdesc{The proof associated with the lemma. Specified as the atom that
+  identifies the proof. The lemma is not necessarily contained in the proof,
+  but can also, e.g., be a negative lemma that relates to the proof. See also
+  \f{lfp\_containing\_proof}.}
+
+\propsig{lf\_is\_in\_proof}{NatNum}
+
+\propdesc{1 iff the lemma is contained in some proof. Then also the properties of
+  Sect.~\ref{sec-lfp-features} are defined. 0 otherwise.}
+  
+\propsig{formula}{\f{lemma}(\var{Head},\var{Body})}
+
+\propdesc{The formula of the lemma. \var{Head} is a \lit{FormulaTerm} and
+  \var{Body} a \lit{FormulaTermList}. If \var{Body} is empty, the lemma is a
+  t-lemma, otherwise it is an s-lemma. \f{lemma}(\var{Head},\var{Body}) may be
+  understood as transformation rule of subgoal \var{Head} to subgoals
+  \var{Body}, modulo unification. Another way to understand it is as a
+  definite clause expressing that \var{Body} implies \var{Head}.}
+
+\propsig{dcterm}{\lit{DCTerm}}
+
+\propdesc{The D-term (proof structure) of the lemma as \lit{DCTerm}. After
+  conversion to a \lit{DTerm}, it may be nonground, where the number of
+  variables is the same as the length of \var{Body} in the value of
+  \f{formula}. Each variable may only have a single occurrence in the
+  \lit{DTerm}. (TODO: clarify the purpose of the restriction.)}
+
+\propsig{method}{\lit{Term}}
+
+\propdesc{A term that indicates the method by which the lemma was obtained.
+  Currently implemented methods:
+
+  \medskip
+  \f{subtree}
+
+  All subtrees (t-lemmas) of the proof's D-term with exception of axioms
+  (leaves) and the proof's D-term itself.
+
+  \medskip
+  \f{slemma\_nonpure}(\var{Limit},\var{K})\\
+  \f{slemma\_pure}(\var{Limit},\var{K})
+
+
+  \var{Limit} is a \lit{NatNum} or $-1$ or a term \f{h(\lit{NatNum})}. \var{K}
+  is a \lit{NatNum}. For all subtrees~$d'$ of the proof's D-term consider all
+  trees~$d''$ obtained from~$d'$ by replacing subtrees of~$d'$ with open nodes
+  (variables).
+
+  If \lit{Limit} is a \lit{NatNum}, then restrict the subtrees $d''$ to those
+  whose tree size does not exceed \var{Limit}. If \lit{Limit} is of the form
+  \f{h(\lit{N})}, then restrict the subtrees $d''$ to those whose height does
+  not exceed \var{N}. If \lit{Limit} is -1, do not apply such a restriction.
+  
+  With method \f{slemma\_nonpure}, replace there inner nodes in all possible
+  ways, each way leading to a distinct s-lemma. With method \f{slemma\_pure},
+  replace all nodes, not just inner nodes, in all possible ways. From the
+  resulting s-lemmas remove some trivial ones: single-node trees representing
+  an axiom or a variable and remove variants of the D-term \f{d(\_,\_)}. Also
+  remove lemmas with only a single match in the proof's D-term. Order the
+  s-lemmas by the number of their matches in the proof's D-term, largest
+  first, and take the first \var{K} ones as s-lemmas (or all remaining
+  s-lemmas if their number is less than \var{K}). So far, these methods do not
+  support determining the \f{lf\_d\_incoming} feature property.
+
+   \medskip
+   \f{treerepair}
+   
+   T- and s-lemmas in the combinatory compression
+   of the proof's D-term obtained via the TreeRePair tool. Supports the
+   \f{lf\_d\_incoming} feature property.
+}% propdesc
+
+\subsubsection{Features of the Lemma's D-term}
+
+\propsig{lf\_d\_csize}{\lit{NatNum}}\\
+\propsig{lf\_d\_tsize}{\lit{NatNum}}\\
+\propsig{lf\_d\_height}{\lit{NatNum}} \propdesc{Compacted size, tree size and
+  height of the lemma's D-term.}
+
+\propsig{lf\_d\_grd\_csize}{\lit{NatNum}} \propdesc{Compacted size of the
+  lemma's D-term after replacing all variables with 0.}
+
+\propsig{lf\_d\_major\_minor\_relation}{\lit{NatNum}}
+
+\propdesc{Describes the structural relationship of the subproofs of the major
+  and minor premise of the lemma. Can have the following values: 0 identical
+  or D-term is atomic; 1 is a strict superterm; 2 is a strict subterm; 3 none
+  of these relationships; 4 for nonground D-terms.}
+
+\propsig{lf\_d\_number\_of\_terminals}{\lit{NatNum}}
+
+\propdesc{Number of subterms in the lemma's D-term which are of the form
+  \f{d($d_1$,$d_2$)} where neither of $d_1,d_2$ is a compound term.}
+
+\subsubsection{Context Dependent Features of the Lemma's D-Term}
+\label{sec-lfp-features}
+
+The features depend on the lemma as embedded in a given proof. They are only
+available for training data extracted from proofs.
+
+\propsig{lfp\_containing\_proof}{\f{proof}}
+
+\propdesc{The proof that contains the lemma. Specified as the atom that
+  identifies the proof. See also \f{lf\_proof}.}
+
+\propsig{lfp\_d\_occs}{\lit{NatNum}} \propdesc{If the lemma's D-term is ground,
+  the number of occurrences of the lemma's D-term in the proof's D-term. If
+  the lemma's D-term is non-ground, the number of subterm occurrences of the
+  proof's D-term that are instances of the lemma's D-term (note that these
+  subterm occurrences may overlap).}
+
+\propsig{lfp\_d\_incoming}{\lit{NatNum}} \propdesc{The number of incoming edges
+  of the lemma in the minimal DAG representing the proof's D-term. This can
+  not be meaningfully determined for all lemma computation methods that yield
+  s-lemmas.}
+
+\propsig{lfp\_d\_occs\_innermost\_matches}{\lit{NatNum}} \propdesc{If the lemma's
+  D-term is ground, the same as \f{lf\_d\_occs}. If the lemma's D-term has
+  variables, the number of subterm occurrences of the proof's D-term that
+  would be rewritten by \textsc{Innermost} replacement.}
+
+\propsig{lfp\_d\_occs\_outermost\_matches}{\lit{NatNum}} \propdesc{If the lemma's
+  D-term is ground, the same as \f{lf\_d\_occs}. If the lemma's D-term has
+  variables, the number of subterm occurrences of the proof's D-term that
+  would be rewritten by \textsc{Outermost} replacement.}
+
+\propsig{lfp\_d\_min\_goal\_dist}{\lit{NatNum}} \propdesc{Number of edges in
+  the proof's D-term of the shortest downward path from the root to a subtree
+  that is an instance of the lemma's D-term.}
+
+\subsubsection{Special Features of the Lemma's Formula Components}
+  
+\propsig{lf\_b\_length}{\lit{NatNum}}
+\propdesc{Length of the \var{Body} component of the lemma's formula.}
+
+\propsig{lf\_hb\_distinct\_hb\_shared\_vars}{\lit{NatNum}}
+  \propdesc{Number of distinct
+  variables that occur in the \var{Head} as well as in the \var{Body}
+  component of the lemma's formula.}
+
+\propsig{lf\_hb\_distinct\_h\_only\_vars}{\lit{NatNum}}
+\propdesc{Number of distinct variables that occur in \var{Head} as but not
+  the \var{Body} component of the lemma's formula.}
+
+\propsig{lf\_hb\_distinct\_b\_only\_vars}{\lit{NatNum}}
+\propdesc{Number of distinct variables that occur in \var{Body} as but not
+  the \var{Head} component of the lemma's formula.}
+
+\propsig{lf\_hb\_singletons}{\lit{NatNum}}
+\propdesc{Number of distinct variables with a single occurrence in
+  \var{Head} and \var{Body} taken together.}
+
+\propsig{lf\_hb\_double\_negation\_occs}{\lit{NatNum}}
+\propdesc{Number of instances of \f{n}(\f{n}(\_)) in \var{Head} and \var{Body}.}
+
+\propsig{lf\_hb\_nongoal\_symbol\_occs}{\lit{NatNum}}
+\propdesc{Number of occurrences of symbols (functions, constants) in
+  \var{Head} and \var{Body} that do not appear in the problem's goal.
+  Context-dependent in that it refers to the problem's goal formula.}
+
+\propsig{lf\_h\_excluded\_goal\_subterms}{\lit{NatNum}}
+\propdesc{Number of distinct subterms of the goal formula (after replacing
+  constants systematicall by variables) that are not a subterm of \var{Head}
+  (modulo the variant relationship). Context-dependent in that it refers to
+  the problem's goal formula.}
+
+\propsig{lf\_h\_subterms\_not\_in\_goal}{\lit{NatNum}}
+\propdesc{Number of distinct subterms of the head that are not a subterm of
+  the goal formula (after replacing constants systematicall by variables,
+  modulo the variant relationship). Context-dependent in that it refers to the
+  problem's goal formula.}
+
+\propsig{lf\_hb\_compression\_ratio\_raw\_deflate}{\lit{NormalizedValue}}\\
+\propsig{lf\_hb\_compression\_ratio\_treerepair}{\lit{NormalizedValue}}\\
+\propsig{lf\_hb\_compression\_ratio\_dag}{\lit{NormalizedValue}}
+\propdesc{Indicates how much the lemma's formula can be compressed. The value
+  is roughly compressed size divided by original tree size. That is, formulas
+  with ``much regularity'' such that they can be compressed stronger receive
+  smaller values. The different properties realize this in variants for
+  different notions and implementations of compression. The \f{raw\_deflate}
+  version depends on intrinsics of SWI-Prolog's term representation and
+  possibly gives different results for the same formula, depending on how it
+  internally shares subterms.}
+
+\propsig{lf\_hb\_organic}{\lit{NatNum}}
+
+\propdesc{Whether the formula is organic. A nonenmpty \var{Body} is translated
+  to an implication, e.g., if \var{Body} = [a,b,c], the considered formula is
+  i(a,i(b,i(c,\var{Head}))). Determined with Minisat. Values: 0: the formula
+  is organic; 1 the formula is not organic but weakly organic; 2 the formula
+  is not weakly organic. See also
+  \url{http://cs.christophwernhard.com/cdtools/downloads/cdtools/pldoc/organic_cd.html}.}
+
+\propsig{lf\_hb\_name}{\lit{Atom}}
+
+\propdesc{A name of the formula if it is well known under some name. For a
+  formula with nonempty body the translation to implication is considered (as
+  for \f{lf\_hb\_organic}) and the name is prefixed with \f{meta\_}. If the
+  formula is not known under some name, the value is \f{zzz}. See also
+  \f{named\_axiom}/2 in
+  \url{http://cs.christophwernhard.com/cdtools/downloads/cdtools/pldoc/named_axioms_cd.html}.}
+
+\propsig{lf\_hb\_name\_status}{\lit{NatNum}}
+
+\propdesc{Number indicating whether the formula has a name in the sense of
+  \f{lf\_hb\_name}: 0 if it has a name and an empty body, 1 if it has a
+  nonempty body and a name (prefixed with \f{meta\_}), 2 otherwise.}
+
+\subsubsection{General Features of the Lemma's Formula Components}
+
+These features are specified below schematically with \var{COMP} for \f{h},
+\f{b}, and \f{hb}, referring the the respective features for the \var{Head}
+component, the \var{Body} component and both of the components joined
+together. The schema parameter \var{ITEM} for \f{var}, \f{const} and \f{fun}
+refers to variables, constants (atomic values in Prolog syntax) and
+function symbols with arity $\geq 1$, respectively.
+
+\propsig{lf\_\var{COMP}\_csize}{\lit{NatNum}}\\
+\propsig{lf\_\var{COMP}\_tsize}{\lit{NatNum}}\\
+\propsig{lf\_\var{COMP}\_height}{\lit{NatNum}}
+
+\propdesc{Compacted size, tree size and height, respectively. (We use these
+  notions, which are also used for D-terms, here for formula terms.)}
+
+\propsig{lf\_\var{COMP}\_distinct\_vars}{\lit{NatNum}}
+\propdesc{Number of distinct variables.}
+
+\propsig{lf\_\var{COMP}\_\var{ITEM}\_occs}{\lit{NatNum}}
+\propdesc{Number of occurrences of syntactic objects of kind \var{ITEM}.}
+
+\propsig{lf\_\var{COMP}\_occs\_of\_most\_frequent\_\var{ITEM}}{\lit{NatNum}}
+\propdesc{Maximum number of occurrences of a syntactic object of kind \var{ITEM}.}
+
+\subsection{Utility Values}
+
+Various utility values (or experimental candidates for utility values). Values
+are between 0 and 1, with smaller values indicating better utility.
+
+\propsig{u\_tsize\_reduction}{\lit{NormalizedValue}}\\
+\propsig{u\_height\_reduction}{\lit{NormalizedValue}}\\
+\propsig{u\_csize\_reduction}{\lit{NormalizedValue}}\\
+\propsig{u\_tsize\_reduction\_subst1}{\lit{NormalizedValue}}\\
+\propsig{u\_height\_reduction\_subst1}{\lit{NormalizedValue}}\\
+\propsig{u\_csize\_reduction\_subst1}{\lit{NormalizedValue}}\\
+ \propsig{u\_tsize\_reduction\_subst2}{\lit{NormalizedValue}}\\
+\propsig{u\_height\_reduction\_subst2}{\lit{NormalizedValue}}\\
+\propsig{u\_csize\_reduction\_subst2}{\lit{NormalizedValue}}
+\propdesc{Indicates the reducing effect of the lemma for the respective
+  measure, tree size, compacted size and height. The value is calculated as
+  \[\m{min}(\m{size}(d_P'), \m{size}(d_P)) / \m{size}(d_P),\]
+  where $\m{size}$ is the respective size measure, $d_P$ is the proof's D-term
+  and $d_P'$ is obtained from $d_P$ and the lemma's D-term by
+  \textsc{Innermost Exhaustive} replacement (the basic versions),
+  \textsc{Innermost} replacement (the \f{\_subst1} versions), or
+  \textsc{Outermost} replacement (the \f{\_subst2} versions). The minimum
+  operator is present on behalf of compacted size, because the replacement
+  operations may increase the compacted size.}
+
+\propsig{u\_occs}{\lit{NormalizedValue}} \propdesc{Indicates the number of
+  occurrences of the lemma. More occurrences correspond to better utility. For
+  lemmas with variables in the D-term \f{lf\_d\_occs\_innermost\_matches} is
+  taken as basis of the calculation.}
+
+\propsig{u\_incoming}{\lit{NormalizedValue}}
+\propdesc{Indicates the number of incoming edges in the DAG representation.
+  A larger number of edges corresponds to better utility.}
+
+\propsig{u\_close\_to\_goal\_path}{\lit{NormalizedValue}} \propdesc{The value
+  of \f{lf\_d\_min\_goal\_dist} normalized in relation to the height of the
+  proof's D-term.}
+
+\propsig{u\_close\_to\_axioms\_height}{\lit{NormalizedValue}}\\
+\propsig{u\_close\_to\_axioms\_tsize}{\lit{NormalizedValue}}
+\propdesc{Indicates how close the lemma is to the axioms, to a finishing of
+  the proof. These are just normalized versions of height and tree size of
+  the lemma's D-term.}
+
+
+\subsection{Utility Values (II)}
+
+Various utility values (or experimental candidates for utility values). Values
+in different range as the other utility values.
+
+\propsig{u\_reproof}{\lit{Float}}
+
+\propdesc{Indicates performance of reproving the problem with the lemma added
+  as a single lemma. Values: 1 best, 0: worst, or worse than without lemma,
+  -1: lemma does not appear in the proof at all.}
+
+\section{Conversion Utilities}
+\label{sec-aux-utils}  
+
+\var{DCTerms} provide a DAG-compressed representation of \var{DTerms}, which
+is in particular if proofs are written to files. The following predicates show
+the conversion between \var{DTerms} and \var{DCTerms}.
+
+\begin{Verbatim}[fontsize=\small]
+d_to_dc(D, A-B) :-
+	term_factorized(D, A, B).
+
+dc_to_d(A-B, D) :-
+        ( B = [] ->
+          D = A
+	; copy_term(A-B, D-B1),
+	  map_bind(B1)
+	).
+
+map_bind([X=X|Y]) :- map_bind(Y).
+map_bind([]).
+\end{Verbatim}
+
+
+\end{document}
