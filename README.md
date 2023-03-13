@@ -15,8 +15,8 @@ role in proof search.
 ## Related Material
 
 - [Preprint: Michael Rawson, Christoph Wernhard, Zsolt Zombori and Wolfgang Bibel:
-  Lemmas: Generation, Selection, Application, 2023]{https://arxiv.org/abs/2303.05854}
-- [Result table]{http://cs.christophwernhard.com/cdtools/exp-lemmas/lemmas.html}  
+  Lemmas: Generation, Selection, Application, 2023](https://arxiv.org/abs/2303.05854)
+- [Result table](http://cs.christophwernhard.com/cdtools/exp-lemmas/lemmas.html)
 
 ## Installation
 
