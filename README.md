@@ -12,6 +12,11 @@ focusing on condensed detachment problems, we simplify the setting
 considerably, allowing us to get at the essence of lemmas and their
 role in proof search.
 
+## Related Material
+
+- [Preprint: Michael Rawson, Christoph Wernhard, Zsolt Zombori and Wolfgang Bibel:
+  Lemmas: Generation, Selection, Application, 2023]{https://arxiv.org/abs/2303.05854}
+- [Result table]{http://cs.christophwernhard.com/cdtools/exp-lemmas/lemmas.html}  
 
 ## Installation
 
@@ -27,6 +32,10 @@ The theorem proving components are written in SWI-Prolog and require the followi
   - Set the environment variable PIE to the /src/ folder, e.g. `export PIE=${HOME}/tools/pie/src/`
 - [TPTP](https://tptp.org)
   - Set the environment variable TPTPDirectory to the root folder, e.g. `export TPTPDirectory=${HOME}/tools/tptp/TPTP-v8.1.2`
+
+The script ./prolog_scripts/check_prerequisites.sh prints information about found and missing installation prerequisites.
+
+It is recommended to add the prolog_scripts/ directory to PATH.
 
 The learning components are written in Python and require pytorch. To create a conda environment with all necessary packages:
 
@@ -87,6 +96,6 @@ Each experiment that uses learning has a corresponding config bash file in the `
   Author = {Michael Rawson, Christoph Wernhard, Zsolt Zombori, Wolfgang Bibel},
   Title = {Lemmas: Generation, Selection, Application},
   Year = {2023},
-  note = {In preparation.},
+  note = {Preprint: \url{https://arxiv.org/abs/2303.05854}},
 }
 ```
